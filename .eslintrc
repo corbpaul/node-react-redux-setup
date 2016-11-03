@@ -1,0 +1,13 @@
+{
+	"parser": "babel-eslint",
+	"extends": "airbnb-base",
+	"rules": {
+		"comma-dangle": [2, "never"],
+        "consistent-return": [2, { "treatUndefinedAsUnspecified": true }],
+		"indent": [2, 4],
+        "max-len": [2, { "code": 150, "ignoreComments": true }],
+		"no-multiple-empty-lines": [2, { "max": 5, "maxEOF": 1 }],
+        "no-param-reassign": [2, { "props": false }],
+		"no-trailing-spaces": [2, { "skipBlankLines": true }]
+	}
+}
