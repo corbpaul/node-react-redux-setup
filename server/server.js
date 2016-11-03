@@ -7,10 +7,13 @@ import Vision from 'vision';
 
 import path from 'path';
 import pug from 'pug';
+import webpack from 'webpack';
+import webpackPlugin from 'hapi-webpack-plugin';
 
 import config from '../config';
 import log from './logging';
-import routes from './routes';
+import reactMiddleware from './middleware/reactMiddleware';
+import webpackConfig from '../webpack.config';
 
 
 
@@ -48,6 +51,30 @@ server.connection({
 
 
 
+// WEBPACK MIDDLEWARE
+// ==============================================
+
+if (process.env.NODE_ENV !== 'production') {
+    const compiler = webpack(webpackConfig);
+    const assets = {
+        historyApiFallback: true,
+        hot: true,
+        quiet: true
+    };
+    
+    server.register({
+        register: webpackPlugin,
+        options: {
+            compiler,
+            assets
+        }
+    });
+}
+
+
+
+
+
 // VIEWS
 // ==============================================
 
@@ -75,7 +102,13 @@ server.register(Vision, (err) => {
 // ROUTES
 // ==============================================
 
-server.route(routes);
+server.ext('onPreResponse', (request, reply) => {
+    if (typeof request.response.statusCode !== 'undefined') {
+        return reply.continue();
+    }
+    
+    return reactMiddleware(request, reply);
+});
 
 
 

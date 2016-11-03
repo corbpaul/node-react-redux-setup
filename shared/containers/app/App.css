@@ -1,0 +1,19 @@
+/* ------------------------------------ *\
+    #APP STYLES
+\* ------------------------------------ */
+
+body {
+    color: #484848;
+    font-family: Karla, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: .875rem;
+}
+
+
+
+
+.container {
+    max-width: 1080px;
+    margin: 1.5rem auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}

@@ -4,6 +4,10 @@ html(lang="en")
     meta(charset="utf-8")
     title Traveller
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Karla")
+    link(rel="stylesheet", href=assets.main.css)
   body
-    #h1 Hello World
     #root!= content
+    script.
+      window.__INITIAL_STATE__ = !{initialState}
+    script(src=assets.main.js)
