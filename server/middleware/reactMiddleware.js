@@ -3,9 +3,7 @@
 
 import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
-import { renderToString } from 'react-dom/server';
 import React from 'react';
-import serializeJS from 'serialize-javascript';
 
 import configureStore from '../../shared/store';
 import createRoutes from '../../shared/routes';
@@ -35,14 +33,14 @@ export default function (request, reply) {
         if (redirectLocation) return reply.redirect(redirectLocation.pathname + redirectLocation.search).code(302);
         if (!renderProps) return reply('Page not found').code(404);
         
-        const content = renderToString(
+        const content = (
             <Provider store={store}>
                 <RouterContext {...renderProps} />
             </Provider>
         );
         
-        const initialState = serializeJS(store.getState());
+        const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(store.getState())};`;
         
-        return reply.view('default', { content, assets, initialState });
+        return reply.view('default', { assets, content, initialState });
     });
 }

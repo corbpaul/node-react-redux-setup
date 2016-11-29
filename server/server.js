@@ -5,8 +5,9 @@ import Hapi from 'hapi';
 import Hoek from 'hoek';
 import Vision from 'vision';
 
+import HapiReactViews from 'hapi-react-views';
+
 import path from 'path';
-import pug from 'pug';
 import webpack from 'webpack';
 import webpackPlugin from 'hapi-webpack-plugin';
 
@@ -88,7 +89,7 @@ server.register(Vision, (err) => {
     
     server.views({
         engines: {
-            pug
+            jsx: HapiReactViews
         },
         relativeTo: __dirname,
         path: 'views'
