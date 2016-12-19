@@ -1,32 +1,50 @@
 {
-  "name": "consumer",
+  "name": "node-react-redux-setup",
   "version": "0.1.0",
-  "description": "Consumer facing website built with Hapi, Webpack, React & Redux",
-  "main": "/server/index.js",
-  "scripts": {
-    "dev": "NODE_ENV=development nodemon ./server --watch ./server | bunyan",
-    "lint": "eslint . && stylelint ."
-  },
-  "pre-push": [
-    "lint"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.wvrgroup.internal/pcorbett/consumer.git"
-  },
+  "description": "Base server setup built with Hapi, Webpack, React & Redux",
   "keywords": [
     "hapi",
     "webpack",
     "react",
     "redux"
   ],
-  "author": "Paul Corbett",
   "license": "ISC",
+  "author": {
+    "name": "Paul Corbett"
+  },
+  "contributors": [
+    {
+      "name": "Paul Corbett"
+    }
+  ],
+  "main": "/src/server/index.js",
+  "scripts": {
+    "build:dev": "NODE_ENV=development webpack --config ./tools/config/webpack/webpack.config.js",
+    "start:dev": "npm run build:dev && NODE_ENV=development NODE_PORT=3005 nodemon ./src/server --watch ./src/server | bunyan",
+    "test": "npm run test:style && npm run test:unit",
+    "test:style": "eslint . && stylelint 'src/**/*.css'",
+    "test:unit": "NODE_ENV=test mocha --compilers js:babel-core/register --require ./tests/setup.js --require ignore-styles src/**/*.test.js"
+  },
+  "pre-push": [
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/corbpaul/node-react-redux-setup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/corbpaul/node-react-redux-setup/issues"
+  },
+  "engines": {
+    "node": "~6.9.1",
+    "npm": "~3.10.8"
+  },
   "dependencies": {
     "assets-webpack-plugin": "3.5.0",
     "babel-core": "6.18.2",
     "babel-loader": "6.2.7",
     "babel-plugin-react-transform": "2.0.2",
+    "babel-polyfill": "6.16.0",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-react": "6.16.0",
     "babel-preset-stage-1": "6.16.0",
@@ -35,35 +53,40 @@
     "css-modules-require-hook": "4.0.5",
     "extract-text-webpack-plugin": "1.0.1",
     "hapi": "15.2.0",
-    "hapi-react-views": "9.2.1",
     "hapi-webpack-plugin": "1.3.0",
-    "hoek": "4.1.0",
+    "keymirror": "0.1.1",
     "postcss-cssnext": "2.8.0",
     "postcss-loader": "1.1.0",
     "postcss-nested": "1.0.0",
-    "pug": "2.0.0-beta6",
     "react": "15.3.2",
     "react-dom": "15.3.2",
+    "react-helmet": "3.2.2",
     "react-redux": "4.4.5",
     "react-router": "2.8.1",
     "react-transform-hmr": "1.0.4",
     "redux": "3.6.0",
+    "redux-logger": "2.7.4",
     "redux-thunk": "2.1.0",
     "serialize-javascript": "1.3.0",
     "style-loader": "0.13.1",
-    "vision": "4.1.0",
     "webpack": "1.13.3",
     "webpack-hot-middleware": "2.13.1"
   },
   "devDependencies": {
     "babel-eslint": "7.1.0",
+    "chai": "3.5.0",
+    "enzyme": "2.6.0",
     "eslint": "3.9.1",
     "eslint-config-airbnb": "12.0.0",
     "eslint-plugin-import": "1.16.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.5.0",
+    "ignore-styles": "5.0.1",
+    "jsdom": "9.8.3",
+    "mocha": "3.2.0",
     "nodemon": "1.11.0",
     "pre-push": "0.1.1",
+    "react-addons-test-utils": "15.3.2",
     "stylelint": "7.5.0"
   }
 }

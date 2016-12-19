@@ -12,6 +12,6 @@ import config from '../config';
 // ==============================================
 
 export default Bunyan.createLogger({
-    name: 'traveller',
+    name: 'react',
     streams: config.default.logs.streams
 });

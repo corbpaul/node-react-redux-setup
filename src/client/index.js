@@ -7,7 +7,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import configureStore from '../shared/store';
-import createRoutes from '../shared/routes';
+import routes from '../shared/routes';
 
 
 
@@ -16,9 +16,7 @@ import createRoutes from '../shared/routes';
 // SET CONSTANTS
 // ==============================================
 
-const initialState = window.__INITIAL_STATE__;
-const store = configureStore(initialState);
-const routes = createRoutes(store);
+const store = configureStore(window.__INITIAL_STATE__);
 
 
 

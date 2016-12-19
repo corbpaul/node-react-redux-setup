@@ -2,6 +2,7 @@
 // ==============================================
 
 require('babel-core/register');
+require('babel-polyfill');
 
 // use css-modules to create module class names
 require('css-modules-require-hook')({

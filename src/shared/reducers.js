@@ -3,6 +3,8 @@
 
 import { combineReducers } from 'redux';
 
+import AppReducer from './containers/app/reducer';
+
 
 
 
@@ -10,4 +12,6 @@ import { combineReducers } from 'redux';
 // EXPORT REDUCERS
 // ==============================================
 
-export default combineReducers({});
+export default combineReducers({
+    app: AppReducer
+});

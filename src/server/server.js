@@ -2,19 +2,14 @@
 // ==============================================
 
 import Hapi from 'hapi';
-import Hoek from 'hoek';
-import Vision from 'vision';
-
-import HapiReactViews from 'hapi-react-views';
 
 import path from 'path';
 import webpack from 'webpack';
 import webpackPlugin from 'hapi-webpack-plugin';
 
-import config from '../config';
 import log from './logging';
 import reactMiddleware from './middleware/reactMiddleware';
-import webpackConfig from '../webpack.config';
+import webpackConfig from '../../tools/config/webpack/webpack.config';
 
 
 
@@ -37,8 +32,8 @@ const server = new Hapi.Server({
 });
 
 server.connection({
-    host: config.default.app.host,
-    port: config.default.app.port,
+    port: process.env.NODE_PORT || 3000,
+    host: process.env.HOSTNAME || '0.0.0.0',
     routes: {
         cors: {
             additionalHeaders: [
@@ -71,30 +66,6 @@ if (process.env.NODE_ENV !== 'production') {
         }
     });
 }
-
-
-
-
-
-// VIEWS
-// ==============================================
-
-server.register(Vision, (err) => {
-    if (err) {
-        log.fatal(err, 'Unable to register Vision plugin');
-        process.exit(1);
-    }
-    
-    Hoek.assert(!err, err);
-    
-    server.views({
-        engines: {
-            jsx: HapiReactViews
-        },
-        relativeTo: __dirname,
-        path: 'views'
-    });
-});
 
 
 
