@@ -1,15 +1,21 @@
-# Consumer
-Consumer facing website built using Hapi, Webpack, React and Redux
+# node-react-redux-setup
+
+Base setup for node, react, redux web app.
+
+*NOTE*: This is a work in progress. 
+
+## Owners
+
+* Paul Corbett
 
 ## Installation
 
-```
-npm install
-```
+	npm install
+
+* Engine requirements: See `package.json`
 
 ## Usage
 
-To start development:
-```
-npm run dev
-```
+To run the project in DEV mode:
+
+	npm run start:dev

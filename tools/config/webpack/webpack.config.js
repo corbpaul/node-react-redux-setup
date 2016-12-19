@@ -1,12 +1,12 @@
 // IMPORT DEPENDENCIES
 // ==============================================
 
-import AssetsPlugin from 'assets-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import cssnext from 'postcss-cssnext';
-import nested from 'postcss-nested';
-import path from 'path';
-import webpack from 'webpack';
+const AssetsPlugin = require('assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const cssnext = require('postcss-cssnext');
+const nested = require('postcss-nested');
+const path = require('path');
+const webpack = require('webpack');
 
 
 
@@ -24,15 +24,15 @@ const DEV = process.env.NODE_ENV !== 'production';
 // WEBPACK CONFIG
 // ==============================================
 
-export default {
+module.exports = {
     entry: DEV
-        ? ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './index.js']
-        : './index.js',
-    context: path.resolve(__dirname, './client'),
+        ? ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'babel-polyfill', './index.js']
+        : ['babel-polyfill', './index.js'],
+    context: path.resolve('./src/client'),
     output: {
         filename: `[name]${DEV ? '' : '.[hash]'}.js`,
         hashDigestLength: 7,
-        path: path.resolve(__dirname, './public'),
+        path: path.resolve('./src/public'),
         publicPath: '/'
     },
     module: {
@@ -63,7 +63,7 @@ export default {
     plugins: [
         new AssetsPlugin({
             filename: 'assets.json',
-            path: 'public'
+            path: './src/public'
         }),
         new ExtractTextPlugin(`[name]${DEV ? '' : '.[hash]'}.css`),
         new webpack.DefinePlugin({

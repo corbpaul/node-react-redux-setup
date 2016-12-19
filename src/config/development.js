@@ -12,8 +12,7 @@ import path from 'path';
 
 export default {
     app: {
-        host: '0.0.0.0',
-        port: 3000
+        siteId: 0
     },
     logs: {
         folder: path.join(__dirname, '../logs'),
