@@ -25,9 +25,6 @@
     "test:style": "eslint . && stylelint 'src/**/*.css'",
     "test:unit": "NODE_ENV=test mocha --compilers js:babel-core/register --require ./tests/setup.js --require ignore-styles src/**/*.test.js"
   },
-  "pre-push": [
-    "test"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/corbpaul/node-react-redux-setup.git"
